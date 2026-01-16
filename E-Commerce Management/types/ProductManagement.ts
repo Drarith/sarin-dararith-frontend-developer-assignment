@@ -15,3 +15,19 @@ type MenuItem = {
 type MenuGroup = {
   items: MenuItem[];
 };
+
+export type ProductTable = {
+  id: number;
+  title: string;
+  sku: string;
+  category: string;
+  stock: number;
+  price: number;
+  thumbnail: string;
+  meta: {
+    createdAt: string;
+    updatedAt: string;
+    barcode: string;
+    qrCode: string;
+  };
+};
