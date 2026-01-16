@@ -1,11 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { tabs, ProductTabItems } from "@/config/productManagementTabs";
+import AllProduct from "./AllProduct";
 
 export default function ProductTab() {
   return (
     <>
-      <Tabs defaultValue={ProductTabItems.AllProducts} className="w-100">
+      <Tabs defaultValue={ProductTabItems.AllProducts} className="w-full">
         <TabsList>
           {tabs.map((tab) => {
             return (
@@ -16,7 +17,7 @@ export default function ProductTab() {
           })}
         </TabsList>
         <TabsContent value={ProductTabItems.AllProducts}>
-          All Products
+          <AllProduct />
         </TabsContent>
         <TabsContent value={ProductTabItems.Published}>
           Published page content
