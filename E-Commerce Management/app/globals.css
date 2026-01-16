@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-my-primary: var(--primary-color);
+  --color-my-secondary: var(--secondary-color);
+  --color-my-success: var(--success-color);
+  --color-my-warning: var(--warning-color);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -47,7 +51,11 @@
 }
 
 :root {
-  
+  --primary-color: #2563eb;
+  --secondary-color: #ffd18d;
+  --success-color: #22c55e;
+  --warning-color: #ef4444;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

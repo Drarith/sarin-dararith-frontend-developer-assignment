@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +16,7 @@ import { items } from "@/config/sidebarItems";
 export default function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-my-primary">
         <SidebarGroup>
           <SidebarGroupLabel>Logo</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -22,10 +24,10 @@ export default function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
