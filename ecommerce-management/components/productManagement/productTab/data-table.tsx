@@ -5,6 +5,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import { useState } from "react";
 
@@ -28,7 +29,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
 
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   const table = useReactTable({
     data,
     columns,
@@ -37,6 +38,7 @@ export function DataTable<TData, TValue>({
     state: {
       rowSelection,
     },
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
