@@ -12,7 +12,7 @@ export default function ProductManagementHeader() {
 
         <NotificationDropdownMenu />
 
-        <div className="h-8 w-8 rounded-full overflow-hidden border bg-secondary">
+        <div className="h-8 w-8 rounded overflow-hidden border bg-secondary">
           <Image
             src="https://github.com/drarith.png"
             alt="Profile"
