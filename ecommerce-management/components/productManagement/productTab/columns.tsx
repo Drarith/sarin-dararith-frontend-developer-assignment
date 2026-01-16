@@ -3,9 +3,30 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
-import type{ ProductTable } from "@/types/ProductManagement";
+import type { ProductTable } from "@/types/ProductManagement";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export const columns: ColumnDef<ProductTable>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          // Handle when some but not all rows are selected
+          // set state to indeterminate to handle Minus sign logic in Checkbox component
+          table.getIsSomePageRowsSelected() && "indeterminate"
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+      />
+    ),
+  },
   {
     accessorKey: "title",
     header: "Product",
