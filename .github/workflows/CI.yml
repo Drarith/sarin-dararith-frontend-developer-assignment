@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./E-commerce Management
+        working-directory: ./ecommerce-management
 
     steps:
       - name: Checkout Code
@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: E-commerce Management/package-lock.json
+          cache-dependency-path: ecommerce-management/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
