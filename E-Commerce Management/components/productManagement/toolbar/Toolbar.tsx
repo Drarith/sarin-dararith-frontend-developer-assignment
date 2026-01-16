@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Toolbar() {
   return (
-    <div className="flex items-center justify-between px-6 py-3 w-full gap-4">
+    <div className="flex items-center justify-between py-3 w-full gap-4">
       <div className="relative text-black/50 flex-1 ">
         <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-5 w-5 " />
         <input

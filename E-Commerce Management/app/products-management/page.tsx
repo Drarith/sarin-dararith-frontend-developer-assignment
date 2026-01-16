@@ -1,14 +1,13 @@
 import ProductManagementHeader from "@/components/productManagement/header/ProductManagementHeader";
 import Toolbar from "@/components/productManagement/toolbar/Toolbar";
+import ProductTab from "@/components/productManagement/productTab/ProductTab";
 
 export default function ProductManagement() {
   return (
-    <>
+    <div className="px-3">
       <ProductManagementHeader />
       <Toolbar />
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <h1 className="text-4xl font-bold">Product Management</h1>
-      </div>
-    </>
+      <ProductTab />
+    </div>
   );
 }
