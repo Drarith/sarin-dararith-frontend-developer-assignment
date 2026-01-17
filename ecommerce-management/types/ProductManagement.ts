@@ -31,3 +31,23 @@ export type ProductTable = {
     qrCode: string;
   };
 };
+
+export interface Category {
+  slug: string;
+  name: string;
+  url: string;
+}
+
+export interface ProductFormData {
+  title: string;
+  description: string;
+  basePrice: string;
+  discountPercentage: string;
+  sku: string;
+  quantity: string;
+  category: string;
+}
+
+export interface AddProductFormProps {
+  onFormComplete?: (isComplete: boolean) => void;
+}

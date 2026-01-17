@@ -4,18 +4,24 @@ import { Search, Download, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ToolbarProps {
-  isAddingProduct: boolean;
-  onToggleAddingProduct: () => void;
+  mode: "list" | "add" | "edit";
+  onAdd?: () => void;
+  onCancel?: () => void;
+  onSave?: () => void;
+  isFormComplete?: boolean;
 }
 
 export default function Toolbar({
-  isAddingProduct,
-  onToggleAddingProduct,
+  mode,
+  onAdd,
+  onCancel,
+  onSave,
+  isFormComplete = false,
 }: ToolbarProps) {
   return (
     <div className="flex items-center justify-between py-3 w-full gap-4">
       <div className="relative text-black/50 flex-1 h-10">
-        {isAddingProduct ? (
+        {mode === "add" ? (
           <div className="flex items-center px-3 h-10 gap-2">
             <p className="text-my-primary font-medium">Product</p>{" "}
             <span className="text-sm">▶&#xFE0E;</span>{" "}
@@ -33,11 +39,11 @@ export default function Toolbar({
         )}
       </div>
       <div className="flex gap-3 ">
-        {isAddingProduct ? (
+        {mode !== "list" ? (
           <Button
             variant="ghost"
             className="border-2 text-black/40 bg-none"
-            onClick={onToggleAddingProduct}
+            onClick={onCancel}
           >
             <X className="h-4 w-4 " />
             Cancel
@@ -52,14 +58,32 @@ export default function Toolbar({
           </Button>
         )}
 
-        <Button
-          variant="default"
-          className="text-white bg-my-primary"
-          onClick={onToggleAddingProduct}
-        >
-          <Plus className="h-10 w-10" />
-          Add Product
-        </Button>
+        {mode === "list" && (
+          <Button
+            variant="default"
+            className="text-white bg-my-primary"
+            onClick={onAdd}
+          >
+            <Plus className="h-10 w-10" />
+            Add Product
+          </Button>
+        )}
+
+        {mode === "add" && (
+          <Button
+            variant="default"
+            className={
+              isFormComplete
+                ? "text-white bg-my-primary"
+                : "text-gray-400 bg-gray-100 cursor-not-allowed"
+            }
+            disabled={!isFormComplete}
+            onClick={isFormComplete ? onSave : undefined}
+          >
+            <Plus className="h-10 w-10" />
+            Add Product
+          </Button>
+        )}
       </div>
     </div>
   );

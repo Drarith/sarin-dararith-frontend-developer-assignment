@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, ChangeEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useQuery } from "@tanstack/react-query";
@@ -12,21 +13,50 @@ import {
 } from "@/components/ui/select";
 
 import { getJSON } from "@/lib/https";
+import type {
+  Category,
+  ProductFormData,
+  AddProductFormProps,
+} from "@/types/ProductManagement";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-interface Category {
-  slug: string;
-  name: string;
-  url: string;
-}
+export default function AddProductForm({
+  onFormComplete,
+}: AddProductFormProps) {
+  const [formData, setFormData] = useState<ProductFormData>({
+    title: "",
+    description: "",
+    basePrice: "",
+    discountPercentage: "",
+    sku: "",
+    quantity: "",
+    category: "",
+  });
 
-export default function AddProductForm() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getJSON<Category[]>(`${BASE_URL}/products/categories`),
   });
-  console.log("Categories data:", data?.[0], isLoading, error);
+
+  const isFormComplete = Object.values(formData).every(
+    (value) => value.trim() !== ""
+  );
+
+  useEffect(() => {
+    onFormComplete?.(isFormComplete);
+  }, [isFormComplete, onFormComplete]);
+
+  const handleInputChange =
+    (field: keyof ProductFormData) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+    };
+
+  const handleSelectChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, category: value }));
+  };
+
   return (
     <div className="w-[1128px] h-[800px] flex gap-6">
       <div className="flex flex-col gap-6 mb-10 flex-1">
@@ -39,7 +69,12 @@ export default function AddProductForm() {
               <label htmlFor="title" className="text-sm font-medium">
                 Product Name
               </label>
-              <Input id="title" placeholder="Type product name here..." />
+              <Input
+                id="title"
+                placeholder="Type product name here..."
+                value={formData.title}
+                onChange={handleInputChange("title")}
+              />
             </div>
 
             <div className="grid gap-2">
@@ -50,6 +85,8 @@ export default function AddProductForm() {
                 id="description"
                 placeholder="Type product description here..."
                 className="min-h-[150px]"
+                value={formData.description}
+                onChange={handleInputChange("description")}
               />
             </div>
           </div>
@@ -61,18 +98,28 @@ export default function AddProductForm() {
           </div>
           <div className="grid gap-6">
             <div className="grid gap-2">
-              <label htmlFor="title" className="text-sm font-medium">
+              <label htmlFor="basePrice" className="text-sm font-medium">
                 Base Price
               </label>
-              <Input id="basePrice" placeholder="Type base price here..." />
+              <Input
+                id="basePrice"
+                placeholder="Type base price here..."
+                value={formData.basePrice}
+                onChange={handleInputChange("basePrice")}
+              />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="title" className="text-sm font-medium">
+              <label
+                htmlFor="discountPercentage"
+                className="text-sm font-medium"
+              >
                 Discount Percentage (%)
               </label>
               <Input
                 id="discountPercentage"
                 placeholder="Type discount percentage here..."
+                value={formData.discountPercentage}
+                onChange={handleInputChange("discountPercentage")}
               />
             </div>
           </div>
@@ -88,15 +135,22 @@ export default function AddProductForm() {
                 <label htmlFor="sku" className="text-sm font-medium">
                   SKU
                 </label>
-                <Input id="sku" placeholder="Type product SKU here..." />
+                <Input
+                  id="sku"
+                  placeholder="Type product SKU here..."
+                  value={formData.sku}
+                  onChange={handleInputChange("sku")}
+                />
               </div>
               <div className="grid gap-2">
-                <label htmlFor="category" className="text-sm font-medium">
+                <label htmlFor="quantity" className="text-sm font-medium">
                   Quantity
                 </label>
                 <Input
                   id="quantity"
                   placeholder="Type product quantity here..."
+                  value={formData.quantity}
+                  onChange={handleInputChange("quantity")}
                 />
               </div>
             </div>
@@ -113,7 +167,10 @@ export default function AddProductForm() {
               <label htmlFor="category" className="text-sm font-medium">
                 Product Category
               </label>
-              <Select>
+              <Select
+                value={formData.category}
+                onValueChange={handleSelectChange}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -124,7 +181,7 @@ export default function AddProductForm() {
                     </SelectItem>
                   ) : (
                     data?.map((category) => (
-                      <SelectItem key={category.name} value={category.name}>
+                      <SelectItem key={category.slug} value={category.slug}>
                         {category.name}
                       </SelectItem>
                     ))

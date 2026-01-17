@@ -1,22 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ProductManagementHeader from "@/components/productManagement/header/ProductManagementHeader";
 import Toolbar from "@/components/productManagement/toolbar/Toolbar";
 import ProductTab from "@/components/productManagement/productTab/ProductTab";
-import AddProductForm from "@/components/productManagement/AddProductForm";
 
 export default function ProductManagement() {
-  const [isAddingProduct, setIsAddingProduct] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="px-3">
       <ProductManagementHeader />
       <Toolbar
-        isAddingProduct={isAddingProduct}
-        onToggleAddingProduct={() => setIsAddingProduct(!isAddingProduct)}
+        mode="list"
+        onAdd={() => router.push("/products-management/add")}
       />
-      {isAddingProduct ? <AddProductForm /> : <ProductTab />}
+      <ProductTab />
     </div>
   );
 }
