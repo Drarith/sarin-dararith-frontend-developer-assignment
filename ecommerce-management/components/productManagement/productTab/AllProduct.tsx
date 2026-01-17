@@ -4,6 +4,8 @@ import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useState } from "react";
+import { getJSON } from "@/lib/https";
+import type { ProductTable } from "@/types/ProductManagement";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const PAGE_LIMIT = 10;
@@ -14,16 +16,13 @@ export default function AllProduct() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["products", skip],
     placeholderData: keepPreviousData,
-    queryFn: async () => {
-      const response = await fetch(
+    queryFn: () =>
+      getJSON<{
+        products: ProductTable[];
+        total: number;
+      }>(
         `${BASE_URL}/products?limit=${PAGE_LIMIT}&skip=${skip}&select=${SELECT}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    },
+      ),
   });
 
   function handlePageIndexClick(page: number) {
