@@ -1,18 +1,54 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import ProductManagementHeader from "@/components/productManagement/header/ProductManagementHeader";
 import Toolbar from "@/components/productManagement/toolbar/Toolbar";
 import AddProductForm from "@/components/productManagement/AddProductForm";
+import { productSchema } from "@/validation/productFormValidation";
+import { ProductFormData } from "@/types/ProductManagement";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { postProduct } from "@/lib/https";
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function AddProductPage() {
   const router = useRouter();
-  const [isFormComplete, setIsFormComplete] = useState(false);
+
+  const form = useForm<ProductFormData>({
+    resolver: zodResolver(productSchema),
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      description: "",
+      basePrice: "",
+      discountPercentage: "",
+      sku: "",
+      quantity: "",
+      category: "",
+    },
+  });
+
+  const { isValid } = form.formState;
+
+  const addProductMutation = useMutation({
+    mutationFn: (data: ProductFormData) => postProduct(BASE_URL || "", data),
+    onSuccess: () => {
+      toast.success("Product added successfully");
+    },
+    onError: () => {
+      toast.error("Failed to add product. Please try again.");
+    },
+  });
+
+  const onSubmit = (data: ProductFormData) => {
+    addProductMutation.mutate(data);
+  };
 
   const handleSaveProduct = () => {
-    console.log("Saving product data...");
-    router.push("/products-management");
+    form.handleSubmit(onSubmit)();
   };
 
   return (
@@ -21,10 +57,10 @@ export default function AddProductPage() {
       <Toolbar
         mode="add"
         onCancel={() => router.push("/products-management")}
-        isFormComplete={isFormComplete}
+        isFormComplete={isValid}
         onSave={handleSaveProduct}
       />
-      <AddProductForm onFormComplete={setIsFormComplete} />
+      <AddProductForm form={form} />
     </div>
   );
 }

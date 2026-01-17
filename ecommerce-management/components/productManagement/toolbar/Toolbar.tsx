@@ -2,14 +2,7 @@
 
 import { Search, Download, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-interface ToolbarProps {
-  mode: "list" | "add" | "edit";
-  onAdd?: () => void;
-  onCancel?: () => void;
-  onSave?: () => void;
-  isFormComplete?: boolean;
-}
+import type { ToolbarProps } from "@/types/Toolbar";
 
 export default function Toolbar({
   mode,
