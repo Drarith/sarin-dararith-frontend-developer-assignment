@@ -19,10 +19,12 @@ type MenuGroup = {
 export type ProductTable = {
   id: number;
   title: string;
+  description?: string;
   sku: string;
   category: string;
   stock: number;
   price: number;
+  discountPercentage?: number;
   thumbnail: string;
   meta: {
     createdAt: string;

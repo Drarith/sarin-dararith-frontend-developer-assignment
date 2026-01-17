@@ -31,3 +31,23 @@ export async function postProduct(
     throw error;
   }
 }
+
+export async function putProduct(
+  url: string,
+  id: string,
+  data: ProductFormData
+): Promise<void> {
+  try {
+    const response = await fetch(`${url}/products/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to update product");
+    }
+  } catch (error) {
+    console.error("putProduct failed:", error);
+    throw error;
+  }
+}

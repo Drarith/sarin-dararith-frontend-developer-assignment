@@ -5,6 +5,8 @@ import Image from "next/image";
 
 import type { ProductTable } from "@/types/ProductManagement";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export const columns: ColumnDef<ProductTable>[] = [
   {
@@ -15,7 +17,7 @@ export const columns: ColumnDef<ProductTable>[] = [
           table.getIsAllPageRowsSelected() ||
           // Handle when some but not all rows are selected
           // set state to indeterminate to handle Minus sign logic in Checkbox component
-          table.getIsSomePageRowsSelected() && "indeterminate"
+          (table.getIsSomePageRowsSelected() && "indeterminate")
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
       />
@@ -81,7 +83,28 @@ export const columns: ColumnDef<ProductTable>[] = [
     },
   },
   {
-    accessorKey: "action",
+    id: "actions",
     header: "Action",
+    cell: ({ row }) => {
+      const product = row.original;
+
+      return (
+        <div className="flex items-center gap-2">
+          <Link href={`/products-management/edit/${product.id}`}>
+            <button
+              className="text-gray-500 hover:text-my-primary transition-colors"
+            >
+              <Pencil className="h-4 w-4" />
+            </button>
+          </Link>
+          <button
+            onClick={() => console.log("Delete item:", product)}
+            className="text-gray-500 hover:text-red-600 transition-colors"
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </div>
+      );
+    },
   },
 ];

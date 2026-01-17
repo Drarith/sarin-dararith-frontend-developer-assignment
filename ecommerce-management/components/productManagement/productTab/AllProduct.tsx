@@ -6,7 +6,6 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useState } from "react";
 import { getJSON } from "@/lib/https";
 import type { ProductTable } from "@/types/ProductManagement";
-import { toast } from "react-toastify";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const PAGE_LIMIT = 10;

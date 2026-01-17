@@ -14,11 +14,13 @@ export default function Toolbar({
   return (
     <div className="flex items-center justify-between py-3 w-full gap-4">
       <div className="relative text-black/50 flex-1 h-10">
-        {mode === "add" ? (
+        {mode === "add" || mode === "edit" ? (
           <div className="flex items-center px-3 h-10 gap-2">
             <p className="text-my-primary font-medium">Product</p>{" "}
             <span className="text-sm">▶&#xFE0E;</span>{" "}
-            <p className="font-medium">Add Product</p>{" "}
+            <p className="font-medium">
+              {mode === "add" ? "Add Product" : "Edit Product"}
+            </p>{" "}
           </div>
         ) : (
           <div className="h-10 relative">
@@ -62,7 +64,7 @@ export default function Toolbar({
           </Button>
         )}
 
-        {mode === "add" && (
+        {(mode === "add" || mode === "edit") && (
           <Button
             variant="default"
             className={
@@ -74,7 +76,7 @@ export default function Toolbar({
             onClick={isFormComplete ? onSave : undefined}
           >
             <Plus className="h-10 w-10" />
-            Add Product
+            {mode === "add" ? "Add Product" : "Save Changes"}
           </Button>
         )}
       </div>
