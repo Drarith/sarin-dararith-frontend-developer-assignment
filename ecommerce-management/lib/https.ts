@@ -51,3 +51,17 @@ export async function putProduct(
     throw error;
   }
 }
+
+export async function deleteProduct(url: string, id: string): Promise<void> {
+  try {
+    const response = await fetch(`${url}/products/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete product");
+    }
+  } catch (error) {
+    console.error("deleteProduct failed:", error);
+    throw error;
+  }
+}
