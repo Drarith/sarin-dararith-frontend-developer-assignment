@@ -17,15 +17,28 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import DataTablePagination from "@/components/pagination/Pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  pageIndex?: number;
+  pageCount?: number;
+  setPageIndex?: (page: number) => void;
+  skip?: number;
+  pageLimit?: number;
+  total?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pageIndex,
+  pageCount,
+  setPageIndex,
+  skip = 0,
+  pageLimit = 10,
+  total = 0,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
 
@@ -42,7 +55,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className="overflow-hidden rounded border">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -85,6 +98,23 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {pageIndex !== undefined && pageCount !== undefined && setPageIndex && (
+        <div className="flex items-center space-x-2 py-4 px-5 justify-between border-t">
+          <div>
+            <p>
+              Showing {skip + 1}-{Math.min(skip + pageLimit, total)} from{" "}
+              {total}
+            </p>
+          </div>
+          <div className="space-x-2">
+            <DataTablePagination
+              pageIndex={pageIndex}
+              pageCount={pageCount}
+              setPageIndex={setPageIndex}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

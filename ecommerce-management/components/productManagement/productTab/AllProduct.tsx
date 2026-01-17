@@ -3,8 +3,7 @@
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import React, { useState } from "react";
-import DataTablePagination from "@/components/pagination/Pagination";
+import { useState } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const PAGE_LIMIT = 10;
@@ -34,17 +33,18 @@ export default function AllProduct() {
   console.log("Fetched data:", data, isLoading, error);
   console.log("Current skip value:", skip);
   return (
-    <div>
-      <DataTable columns={columns} data={data?.products ?? []} />
-      <div className="flex items-center justify-end space-x-2 py-4 px-5">
-        <div className="space-x-2">
-
-          <DataTablePagination
-            pageIndex={skip}
-            pageCount={Math.ceil((data?.total ?? 0) / PAGE_LIMIT)}
-            setPageIndex={handlePageIndexClick}
-          />
-        </div>
+    <div className="w-[1128px] h-[924px] flex flex-col">
+      <div className="flex-1 overflow-auto">
+        <DataTable
+          columns={columns}
+          data={data?.products ?? []}
+          pageIndex={skip}
+          pageCount={Math.ceil((data?.total ?? 0) / PAGE_LIMIT)}
+          setPageIndex={handlePageIndexClick}
+          skip={skip}
+          pageLimit={PAGE_LIMIT}
+          total={data?.total ?? 0}
+        />
       </div>
     </div>
   );
