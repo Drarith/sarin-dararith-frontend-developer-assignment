@@ -32,6 +32,8 @@ export type ProductTable = {
   };
 };
 
+import { UseFormReturn } from "react-hook-form";
+
 export interface Category {
   slug: string;
   name: string;
@@ -49,5 +51,5 @@ export interface ProductFormData {
 }
 
 export interface AddProductFormProps {
-  onFormComplete?: (isComplete: boolean) => void;
+  form: UseFormReturn<ProductFormData>;
 }

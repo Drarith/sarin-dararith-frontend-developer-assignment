@@ -6,6 +6,8 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/sidebar/SideBar";
 
+import { Bounce, ToastContainer } from "react-toastify";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,6 +38,14 @@ export default function RootLayout({
             <AppSidebar />
             <main className="flex-1">
               <SidebarTrigger />
+              <ToastContainer
+                position="top-right"
+                autoClose={10000}
+                pauseOnHover={true}
+                draggable={true}
+                theme={"colored"}
+                transition={Bounce}
+              />
               {children}
             </main>
           </SidebarProvider>

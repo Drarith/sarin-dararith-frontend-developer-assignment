@@ -6,6 +6,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useState } from "react";
 import { getJSON } from "@/lib/https";
 import type { ProductTable } from "@/types/ProductManagement";
+import { toast } from "react-toastify";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const PAGE_LIMIT = 10;
@@ -15,6 +16,7 @@ export default function AllProduct() {
   const [skip, setSkip] = useState(0);
   const { data, isLoading, error } = useQuery({
     queryKey: ["products", skip],
+    // Note to self: Remember to change this to loading UI later for better UX
     placeholderData: keepPreviousData,
     queryFn: () =>
       getJSON<{
@@ -29,8 +31,6 @@ export default function AllProduct() {
     setSkip(page);
   }
 
-  console.log("Fetched data:", data, isLoading, error);
-  console.log("Current skip value:", skip);
   return (
     <div className="w-[1128px] h-[924px] flex flex-col">
       <div className="flex-1 overflow-auto">
