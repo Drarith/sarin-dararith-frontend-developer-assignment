@@ -11,8 +11,11 @@ export default function NotificationDropdownMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative ">
-          <Bell className="h-5 w-5 text-my-primary" />
+        <Button variant="ghost" className="relative " size={"icon"}>
+          <Bell
+            strokeWidth={2.5}
+            className=" min-w-6 min-h-6 text-my-primary"
+          />
           <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-background" />
         </Button>
       </DropdownMenuTrigger>

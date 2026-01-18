@@ -30,7 +30,7 @@ export default function AllProduct() {
   }
 
   return (
-    <div className="flex flex-col">
+  
       <div className="flex-1 overflow-auto">
         {isLoading ? (
           <ProductTableSkeleton />
@@ -47,6 +47,6 @@ export default function AllProduct() {
           />
         )}
       </div>
-    </div>
+    
   );
 }

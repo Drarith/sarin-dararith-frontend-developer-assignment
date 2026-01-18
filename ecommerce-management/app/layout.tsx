@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import ReactQueryProvider from "@/providers/reactQueryProvider";
 import "./globals.css";
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/sidebar/SideBar";
 
 import { Bounce, ToastContainer } from "react-toastify";
@@ -34,14 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
-          <SidebarProvider>
-            <AppSidebar />
+          <div className="flex h-[900]">
 
+            <AppSidebar />
             <main className="flex-1 w-full">
-              <div className="p-4 min-[1100px]:hidden flex items-center border-b">
-                
-                <SidebarTrigger variant={"default"} className="w-20 bg-my-primary"/>
-              </div>
               <ToastContainer
                 position="top-right"
                 autoClose={10000}
@@ -52,7 +47,7 @@ export default function RootLayout({
               />
               <div className="w-full px-4">{children}</div>
             </main>
-          </SidebarProvider>
+          </div>
         </ReactQueryProvider>
       </body>
     </html>

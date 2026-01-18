@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );
@@ -99,13 +99,14 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
       {pageIndex !== undefined && pageCount !== undefined && setPageIndex && (
-        <div className="flex items-center space-x-2 py-4 px-5 justify-between border-t">
-          <div>
+        <div className="flex items-center space-x-2 py-4 px-5 justify-end min-[640px]:justify-between border-t">
+          <div className="max-[640px]:hidden">
             <p>
               Showing {skip + 1}-{Math.min(skip + pageLimit, total)} from{" "}
               {total}
             </p>
           </div>
+
           <div className="space-x-2">
             <DataTablePagination
               pageIndex={pageIndex}
