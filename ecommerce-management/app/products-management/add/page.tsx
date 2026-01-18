@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ProductManagementHeader from "@/components/productManagement/header/ProductManagementHeader";
-import Toolbar from "@/components/productManagement/toolbar/Toolbar";
-import AddProductForm from "@/components/productManagement/AddProductForm";
+import Toolbar from "@/components/productManagement/Form/Toolbar";
+import AddProductForm from "@/components/productManagement/Form/AddProductForm";
 import { productSchema } from "@/validation/productFormValidation";
 import { ProductFormData } from "@/types/ProductManagement";
 import { useMutation } from "@tanstack/react-query";
@@ -37,6 +37,7 @@ export default function AddProductPage() {
     mutationFn: (data: ProductFormData) => postProduct(BASE_URL || "", data),
     onSuccess: () => {
       toast.success("Product added successfully");
+      form.reset();
     },
     onError: () => {
       toast.error("Failed to add product. Please try again.");
@@ -59,6 +60,7 @@ export default function AddProductPage() {
         onCancel={() => router.push("/products-management")}
         isFormComplete={isValid}
         onSave={handleSaveProduct}
+        isSubmitting={addProductMutation.isPending}
       />
       <AddProductForm form={form} />
     </div>

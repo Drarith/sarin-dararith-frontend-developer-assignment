@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
-          <div className="flex h-[900]">
+          <div className="flex h-[1000] overflow-hidden">
 
             <AppSidebar />
             <main className="flex-1 w-full">

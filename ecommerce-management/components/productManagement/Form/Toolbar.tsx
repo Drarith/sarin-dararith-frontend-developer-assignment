@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Download, Plus, X } from "lucide-react";
+import { Search, Download, Plus, X, SaveIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ToolbarProps } from "@/types/Toolbar";
 
@@ -10,6 +10,7 @@ export default function Toolbar({
   onCancel,
   onSave,
   isFormComplete = false,
+  isSubmitting = false,
 }: ToolbarProps) {
   return (
     <div className="flex items-center justify-between py-3 gap-4">
@@ -72,11 +73,20 @@ export default function Toolbar({
                 ? "text-white bg-my-primary"
                 : "text-gray-400 bg-gray-100 cursor-not-allowed"
             }
-            disabled={!isFormComplete}
+            disabled={!isFormComplete || isSubmitting}
             onClick={isFormComplete ? onSave : undefined}
           >
-            <Plus className="h-10 w-10" />
-            {mode === "add" ? "Add Product" : "Save Changes"}
+            {isSubmitting ? (
+              "Saving..."
+            ) : mode === "add" ? (
+              <>
+                <Plus className="h-5 w-5 mr-2" /> Add Product
+              </>
+            ) : (
+              <>
+                <SaveIcon className="h-5 w-5 mr-2" /> Save Changes
+              </>
+            )}
           </Button>
         )}
       </div>

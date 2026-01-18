@@ -4,4 +4,5 @@ export interface ToolbarProps {
   onCancel?: () => void;
   onSave?: () => void;
   isFormComplete?: boolean;
+  isSubmitting?: boolean;
 }

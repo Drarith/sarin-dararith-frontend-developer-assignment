@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ProductManagementHeader from "@/components/productManagement/header/ProductManagementHeader";
-import Toolbar from "@/components/productManagement/toolbar/Toolbar";
-import AddProductForm from "@/components/productManagement/AddProductForm";
+import Toolbar from "@/components/productManagement/Form/Toolbar";
+import AddProductForm from "@/components/productManagement/Form/AddProductForm";
 import { productSchema } from "@/validation/productFormValidation";
 import { ProductFormData, ProductTable } from "@/types/ProductManagement";
 import { useMutation } from "@tanstack/react-query";
@@ -15,11 +15,14 @@ import { putProduct } from "@/lib/https";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface EditProductClientProps {
-  initialData: ProductTable; 
+  initialData: ProductTable;
   id: string;
 }
 
-export default function EditProductClient({ initialData, id }: EditProductClientProps) {
+export default function EditProductClient({
+  initialData,
+  id,
+}: EditProductClientProps) {
   const router = useRouter();
 
   const form = useForm<ProductFormData>({
@@ -65,6 +68,7 @@ export default function EditProductClient({ initialData, id }: EditProductClient
         onCancel={() => router.push("/products-management")}
         isFormComplete={isValid}
         onSave={handleSaveProduct}
+        isSubmitting={updateProductMutation.isPending}
       />
       <AddProductForm form={form} />
     </div>

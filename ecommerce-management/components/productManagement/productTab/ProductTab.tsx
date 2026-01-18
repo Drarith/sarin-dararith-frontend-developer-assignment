@@ -7,7 +7,7 @@ export default function ProductTab() {
   return (
     <div className="w-full">
       <Tabs defaultValue={ProductTabItems.AllProducts} className="w-full">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 gap-8">
           <TabsList className="bg-transparent border">
             {tabs.map((tab) => (
               <TabsTrigger

@@ -24,7 +24,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
     formState: { errors },
   } = form;
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isPending } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getJSON<Category[]>(`${BASE_URL}/products/categories`),
   });
@@ -42,6 +42,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                 Product Name
               </label>
               <Input
+                className="bg-black/2"
                 id="title"
                 placeholder="Type product name here..."
                 {...register("title")}
@@ -58,7 +59,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
               <Textarea
                 id="description"
                 placeholder="Type product description here..."
-                className="min-h-[150px]"
+                className="min-h-[150px] bg-black/2"
                 {...register("description")}
               />
               {errors.description && (
@@ -80,9 +81,10 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                 Base Price
               </label>
               <Input
+                className="bg-black/2"
                 id="basePrice"
                 type="number"
-                placeholder="Type base price here..."
+                placeholder="$ Type base price here..."
                 {...register("basePrice")}
               />
               {errors.basePrice && (
@@ -99,6 +101,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                 Discount Percentage (%)
               </label>
               <Input
+                className="bg-black/2"
                 id="discountPercentage"
                 type="number"
                 placeholder="Type discount percentage here..."
@@ -124,6 +127,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                   SKU
                 </label>
                 <Input
+                  className="bg-black/2"
                   id="sku"
                   placeholder="Type product SKU here..."
                   {...register("sku")}
@@ -137,6 +141,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                   Quantity
                 </label>
                 <Input
+                  className="bg-black/2"
                   id="quantity"
                   type="number"
                   placeholder="Type product quantity here..."
@@ -167,10 +172,10 @@ export default function AddProductForm({ form }: AddProductFormProps) {
                 name="category"
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-black/2">
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper">
                       {isLoading ? (
                         <SelectItem value="loading" disabled>
                           Loading...

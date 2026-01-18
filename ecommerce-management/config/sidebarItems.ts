@@ -3,7 +3,7 @@ import {
   BoxIcon,
   Handbag,
   Users,
-  Settings,
+  FolderClosed
 } from "lucide-react";
 
 export const items = [
@@ -30,6 +30,6 @@ export const items = [
   {
     title: "Reports",
     url: "/reports-management",
-    icon: Settings,
+    icon: FolderClosed,
   },
 ];

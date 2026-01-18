@@ -29,11 +29,7 @@ export const columns: ColumnDef<ProductTable>[] = [
   },
   {
     accessorKey: "title",
-    header: () => (
-      <span className="flex justify-between">
-        Product <span className="text-black/70 mr-3">&#9660;</span>
-      </span>
-    ),
+    header: () => <span className="flex justify-between">Product</span>,
     cell: ({ row }) => {
       const image = row.original.thumbnail;
       const title = row.getValue("title") as string;
@@ -74,7 +70,6 @@ export const columns: ColumnDef<ProductTable>[] = [
     cell: ({ row }) => (
       <span className="hidden md:block">{row.getValue("stock")}</span>
     ),
-
   },
   {
     accessorKey: "price",

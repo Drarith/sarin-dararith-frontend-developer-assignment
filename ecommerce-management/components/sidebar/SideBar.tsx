@@ -36,9 +36,9 @@ export default function AppSidebar() {
           ${isOpen ? "max-[1100px]:translate-x-0" : "max-[1100px]:-translate-x-full"}
         `}
       >
-        <div className="h-20 flex items-center px-8">
+        <div className="h-20 flex items-center px-6">
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-full mr-2 border-6 border-white bg-transparent"></div>
+            <div className="w-6 h-6 rounded-full mr-1 border-6 border-white bg-transparent"></div>
             <span className="text-xl font-bold tracking-wide">Logo</span>
           </div>
         </div>
