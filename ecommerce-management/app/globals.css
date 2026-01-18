@@ -131,4 +131,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  a, button, [role="button"], input[type="button"], input[type="submit"] {
+    cursor: pointer;
+  }
+
+  [onClick] {
+    cursor: pointer;
+  }
 }

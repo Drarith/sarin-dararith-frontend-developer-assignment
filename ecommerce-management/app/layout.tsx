@@ -33,10 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
-          <div className="flex h-[1000] overflow-hidden">
+          <div className="flex h-screen overflow-hidden">
 
             <AppSidebar />
-            <main className="flex-1 w-full">
+            <main className="flex-1 w-full overflow-y-auto">
               <ToastContainer
                 position="top-right"
                 autoClose={10000}
