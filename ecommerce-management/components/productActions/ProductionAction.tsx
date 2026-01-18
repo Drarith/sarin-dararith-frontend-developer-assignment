@@ -18,11 +18,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const BASE_URL = "https://dummyjson.com";
+import type { ProductActionsProps } from "@/types/ProductManagement";
 
-interface ProductActionsProps {
-  id: string;
-}
+const BASE_URL = "https://dummyjson.com";
 
 // 1. Renamed for clarity
 export function ProductActions({ id }: ProductActionsProps) {

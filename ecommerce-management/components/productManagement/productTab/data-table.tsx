@@ -18,17 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import DataTablePagination from "@/components/pagination/Pagination";
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  pageIndex?: number;
-  pageCount?: number;
-  setPageIndex?: (page: number) => void;
-  skip?: number;
-  pageLimit?: number;
-  total?: number;
-}
+import type { DataTableProps } from "@/types/ProductManagement";
 
 export function DataTable<TData, TValue>({
   columns,

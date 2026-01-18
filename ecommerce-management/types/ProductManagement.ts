@@ -1,3 +1,6 @@
+import { ColumnDef } from "@tanstack/table-core";
+import { UseFormReturn } from "react-hook-form";
+
 export type UserMenu = {
   name: string;
   label: string;
@@ -34,8 +37,6 @@ export type ProductTable = {
   };
 };
 
-import { UseFormReturn } from "react-hook-form";
-
 export interface Category {
   slug: string;
   name: string;
@@ -54,4 +55,30 @@ export interface ProductFormData {
 
 export interface AddProductFormProps {
   form: UseFormReturn<ProductFormData>;
+}
+
+export interface EditProductClientProps {
+  initialData: ProductTable;
+  id: string;
+}
+
+export interface DataTablePaginationProps {
+  pageIndex: number;
+  pageCount: number;
+  setPageIndex: (page: number) => void;
+}
+
+export interface ProductActionsProps {
+  id: string;
+}
+
+export interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  pageIndex?: number;
+  pageCount?: number;
+  setPageIndex?: (page: number) => void;
+  skip?: number;
+  pageLimit?: number;
+  total?: number;
 }

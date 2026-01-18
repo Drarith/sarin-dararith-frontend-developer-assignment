@@ -10,11 +10,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-interface DataTablePaginationProps {
-  pageIndex: number;
-  pageCount: number;
-  setPageIndex: (page: number) => void;
-}
+import type { DataTablePaginationProps } from "@/types/ProductManagement";
 
 export default function DataTablePagination({ pageIndex, pageCount, setPageIndex }: DataTablePaginationProps) {
   

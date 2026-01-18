@@ -11,13 +11,9 @@ import { ProductFormData, ProductTable } from "@/types/ProductManagement";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { putProduct } from "@/lib/https";
+import type { EditProductClientProps } from "@/types/ProductManagement";
 
 const BASE_URL = "https://dummyjson.com";
-
-interface EditProductClientProps {
-  initialData: ProductTable;
-  id: string;
-}
 
 export default function EditProductClient({
   initialData,
