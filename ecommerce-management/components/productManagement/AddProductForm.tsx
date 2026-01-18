@@ -30,7 +30,7 @@ export default function AddProductForm({ form }: AddProductFormProps) {
   });
 
   return (
-    <div className="w-[1128px] h-[800px] flex gap-6">
+    <div className="flex gap-6">
       <div className="flex flex-col gap-6 mb-10 flex-1">
         <div className="rounded-lg border bg-white p-6 shadow-sm">
           <div className="mb-6">

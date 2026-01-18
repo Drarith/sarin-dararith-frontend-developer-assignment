@@ -12,7 +12,7 @@ export default function Toolbar({
   isFormComplete = false,
 }: ToolbarProps) {
   return (
-    <div className="flex items-center justify-between py-3 w-full gap-4">
+    <div className="flex items-center justify-between py-3 gap-4">
       <div className="relative text-black/50 flex-1 h-10">
         {mode === "add" || mode === "edit" ? (
           <div className="flex items-center px-3 h-10 gap-2">

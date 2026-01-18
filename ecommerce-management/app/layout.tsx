@@ -36,8 +36,12 @@ export default function RootLayout({
         <ReactQueryProvider>
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex-1">
-              <SidebarTrigger />
+
+            <main className="flex-1 w-full">
+              <div className="p-4 min-[1100px]:hidden flex items-center border-b">
+                
+                <SidebarTrigger variant={"default"} className="w-20 bg-my-primary"/>
+              </div>
               <ToastContainer
                 position="top-right"
                 autoClose={10000}
@@ -46,7 +50,7 @@ export default function RootLayout({
                 theme={"colored"}
                 transition={Bounce}
               />
-              {children}
+              <div className="w-full px-4">{children}</div>
             </main>
           </SidebarProvider>
         </ReactQueryProvider>
