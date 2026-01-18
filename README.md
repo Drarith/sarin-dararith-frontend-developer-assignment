@@ -23,6 +23,7 @@
 -   **Validation:** Schema validation using **Zod**.
 -   **State Management:** Server state management and caching with **TanStack Query (React Query)**.
 -   **Styling:** Utility-first styling with **Tailwind CSS** and **Shadcn UI** components.
+-   **CI** Automated GitHub Actions pipeline that runs linting, simple test, and build verification on every push or pull request to ensure code stability.
 
 ## Tech Stack
 
