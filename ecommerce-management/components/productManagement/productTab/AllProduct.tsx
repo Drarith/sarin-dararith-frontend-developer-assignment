@@ -2,13 +2,13 @@
 
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getJSON } from "@/lib/https";
 import type { ProductTable } from "@/types/ProductManagement";
 import ProductTableSkeleton from "@/components/skeletons/ProductTableSkeleton";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BASE_URL = "https://dummyjson.com";
 const PAGE_LIMIT = 10;
 const SELECT = "title,price,sku,stock,category,thumbnail,meta";
 

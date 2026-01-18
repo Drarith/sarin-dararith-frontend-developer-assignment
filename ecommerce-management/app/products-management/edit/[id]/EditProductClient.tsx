@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { putProduct } from "@/lib/https";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BASE_URL = "https://dummyjson.com";
 
 interface EditProductClientProps {
   initialData: ProductTable;

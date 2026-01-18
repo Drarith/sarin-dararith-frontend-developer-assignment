@@ -15,7 +15,7 @@ import {
 import { getJSON } from "@/lib/https";
 import type { Category, AddProductFormProps } from "@/types/ProductManagement";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BASE_URL = "https://dummyjson.com";
 
 export default function AddProductForm({ form }: AddProductFormProps) {
   const {
